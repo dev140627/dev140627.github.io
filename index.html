@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Devarya Portfolio</title>
+<meta name="description" content="Devarya, a B.Tech CSBS student working where technology meets business: product thinking, UX in Figma, data and automation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Familjen+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+<!-- loader only shows when JS runs, so the page never gets stuck behind it -->
+<script>document.documentElement.classList.add('is-loading');</script>
+</head>
+<body>
+
+<!-- LOADER: the name fills up from the bottom while the counter runs 000 → 100 -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <div class="loader-word">
+      <span class="loader-outline">DEV.EXE</span>
+      <span class="loader-fill">DEV.EXE</span>
+    </div>
+    <span class="loader-line"><i></i></span>
+    <span class="loader-count" id="loader-count">000</span>
+  </div>
+</div>
+<script>
+(function () {
+  var root = document.documentElement, el = document.getElementById('loader'), out = document.getElementById('loader-count');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var MIN = reduce ? 400 : 3000, t0 = performance.now(), v = 0, loaded = false, shown = -1;
+  var done = function () { loaded = true; };
+  if (document.readyState === 'complete') done(); else addEventListener('load', done);
+  setTimeout(done, 7000); // never wait forever on a slow CDN
+  (function tick(now) {
+    var t = Math.min(1, (now - t0) / MIN);
+    var base = 100 * (1 - Math.pow(1 - t, 2));            // eased 0 → 100 over MIN ms
+    var goal = loaded ? base : Math.min(base, 92);        // hold short of 100 until the page has loaded
+    v += (goal - v) * 0.18;
+    if (loaded && t >= 1 && v > 99.4) v = 100;
+    var n = Math.floor(v);
+    if (n !== shown) { shown = n; out.textContent = ('00' + n).slice(-3); el.style.setProperty('--p', (v / 100).toFixed(3)); }
+    if (v < 100) return requestAnimationFrame(tick);
+    setTimeout(function () {
+      root.classList.add('loader-out');
+      setTimeout(function () { root.classList.remove('is-loading', 'loader-out'); el.remove(); }, reduce ? 50 : 900);
+    }, 250);
+  })(t0);
+})();
+</script>
+
+<header class="nav">
+  <a class="logo" href="#top" aria-label="Devarya, home">
+    <span class="logo-mark">D</span>
+    <span class="logo-name">Devarya<br>Portfolio</span>
+  </a>
+  <nav class="nav-links" aria-label="Main">
+    <a href="#process">Process</a>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#certs">Certs</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+  <!-- HERO: big headline (splits apart on scroll) + intro + parallax sticker board -->
+  <section class="hero">
+    <h1 class="headline" aria-label="Product Thinker">
+      <span class="line" data-split>PRODUCT</span>
+      <span class="line line-outline" data-split>THINKER</span>
+    </h1>
+
+    <div class="intro">
+      <p>I'm Devarya, a second-year B.Tech CSBS student working where technology meets business.</p>
+      <p>I build automations, design in Figma and dig into data to figure out what's actually worth building.</p>
+      <a class="cta" href="#contact">Get in touch <span aria-hidden="true">→</span></a>
+    </div>
+
+    <!-- STICKER BOARD: grid paper, stickers sit at different depths -->
+    <div class="board" id="board">
+      <div class="portrait" id="portrait" aria-hidden="true">
+        <span>D</span>
+      </div>
+
+      <button class="sticker s-teal"   data-depth="0.7"  style="--x:12%; --y:24%; --r:-8deg">Product<br>Thinking</button>
+      <button class="sticker s-pink"   data-depth="0.35" style="--x:62%; --y:18%; --r:7deg">UX &amp; Figma</button>
+      <button class="sticker s-yellow" data-depth="0.9"  style="--x:4%;  --y:62%; --r:5deg">SQL &amp; Data</button>
+      <button class="sticker s-orange" data-depth="0.5"  style="--x:24%; --y:78%; --r:-6deg">Data<br>Analytics</button>
+      <button class="sticker s-violet" data-depth="0.8"  style="--x:70%; --y:58%; --r:-10deg">Automation</button>
+      <button class="sticker s-green round" data-depth="0.25" style="--x:58%; --y:76%; --r:12deg">Power BI</button>
+    </div>
+  </section>
+
+  <!-- TOOLKIT: a slow scrolling strip that leans with scroll speed -->
+  <div class="marquee" id="marquee" aria-label="Toolkit: SQL, Figma, Power BI, n8n, Java, HTML and CSS, Python">
+    <div class="marquee-track" aria-hidden="true">
+      <span>SQL</span><i>✦</i><span>Figma</span><i>✦</i><span>Power BI</span><i>✦</i><span>n8n</span><i>✦</i><span>Java</span><i>✦</i><span>HTML / CSS</span><i>✦</i><span>Python (learning)</span><i>✦</i>
+      <span>SQL</span><i>✦</i><span>Figma</span><i>✦</i><span>Power BI</span><i>✦</i><span>n8n</span><i>✦</i><span>Java</span><i>✦</i><span>HTML / CSS</span><i>✦</i><span>Python (learning)</span><i>✦</i>
+    </div>
+  </div>
+
+  <!-- PROCESS: pinned section, scrolling scrubs a 3D model of the logo apart layer by layer -->
+  <section class="process" id="process" aria-labelledby="process-title">
+    <div class="process-sticky">
+      <div class="process-copy">
+        <span class="tag">How I work</span>
+        <h2 id="process-title">One idea, <br>five layers</h2>
+        <ol class="steps" id="steps">
+          <li style="--c: var(--teal)"><span class="num">01</span><h3>Ask why</h3>
+            <div class="step-body"><p>Start from the problem and the people who have it, not the feature.</p></div></li>
+          <li style="--c: var(--pink)"><span class="num">02</span><h3>Sketch it</h3>
+            <div class="step-body"><p>Flows and wireframes in Figma before a single line of code.</p></div></li>
+          <li style="--c: var(--yellow)"><span class="num">03</span><h3>Check the data</h3>
+            <div class="step-body"><p>SQL and Power BI to see what is actually happening.</p></div></li>
+          <li style="--c: var(--violet)"><span class="num">04</span><h3>Automate the boring part</h3>
+            <div class="step-body"><p>n8n workflows for anything that repeats.</p></div></li>
+          <li style="--c: var(--green)"><span class="num">05</span><h3>Ship &amp; learn</h3>
+            <div class="step-body"><p>Put it in front of people, measure, then iterate.</p></div></li>
+        </ol>
+        <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+      </div>
+      <div class="model-wrap" id="model-wrap">
+        <canvas id="model" aria-hidden="true"></canvas>
+        <p class="model-hint">Scroll to take it apart</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK: 3D carousel of projects and real numbers -->
+  <section class="work" id="work">
+    <div class="section-head" data-reveal>
+      <h2>Selected work</h2>
+      <p>Drag, swipe or use the arrows to spin through.</p>
+    </div>
+
+    <div class="carousel" id="carousel" tabindex="0" aria-roledescription="carousel" aria-label="Selected work. Use left and right arrow keys to rotate.">
+      <div class="ring" id="ring">
+        <article class="card tile tile-bright s-teal-bg">
+          <strong class="card-num" aria-hidden="true">1</strong>
+          <span class="tag">Database design · DBMS</span>
+          <h3>Smart Budget Planner</h3>
+          <p>An expense tracker schema with automatic categorisation by keyword, 50-30-20 budget templates and goal tracking.</p>
+        </article>
+
+        <article class="card tile tile-bright s-yellow-bg">
+          <strong class="card-num" aria-hidden="true">2</strong>
+          <span class="tag">AI automation – n8n</span>
+          <h3>Workflow Automation</h3>
+          <p>Save time by automating repetitive tasks with AI-powered workflows.</p>
+        </article>
+
+        <article class="card tile tile-bright s-pink-bg">
+          <strong class="card-num" aria-hidden="true">3</strong>
+          <span class="tag">Web · HTML &amp; CSS</span>
+          <h3>Discography<br>Site</h3>
+          <p>A team capstone: an artist site with a top-albums grid, hover pop-outs and embedded Spotify players.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="carousel-ui">
+      <button class="spin" id="prev" aria-label="Previous project">←</button>
+      <span class="count" id="count" aria-live="polite">01 / 03</span>
+      <button class="spin" id="next" aria-label="Next project">→</button>
+    </div>
+  </section>
+
+  <!-- ABOUT: the toolkit orbits on a tilted 3D plane; scrolling turns the orbits -->
+  <section class="about" id="about">
+    <div class="about-side">
+      <h2 data-reveal>About</h2>
+      <div class="orbit-scene" aria-hidden="true">
+        <div class="orbit-plane" id="orbit">
+          <span class="orbit-ring outer" id="ring-outer"></span>
+          <span class="orbit-ring inner" id="ring-inner"></span>
+          <span class="planet" data-ring="inner" data-a="20"><span class="pin"><b class="s-teal">SQL</b><i></i></span></span>
+          <span class="planet" data-ring="inner" data-a="200"><span class="pin"><b class="s-pink">Figma</b><i></i></span></span>
+          <span class="planet" data-ring="outer" data-a="100"><span class="pin"><b class="s-yellow">Power BI</b><i></i></span></span>
+          <span class="planet" data-ring="outer" data-a="220"><span class="pin"><b class="s-violet">n8n</b><i></i></span></span>
+          <span class="planet" data-ring="outer" data-a="340"><span class="pin"><b class="s-green">Python</b><i></i></span></span>
+        </div>
+      </div>
+    </div>
+    <div class="about-body">
+      <p class="lead" data-reveal>I like figuring out the "why" behind a product before the "how".</p>
+      <p data-reveal>I'm currently pursuing a B.Tech in Computer Science and Business Systems at D.Y. Patil University, Navi Mumbai. I'm interested in understanding how technology, business and user experience come together to shape better products.</p>
+      <dl class="facts" data-reveal>
+        <div><dt>Studying</dt><dd>B.Tech CSBS, 2nd year</dd></div>
+        <div><dt>Looking for</dt><dd>PM / BA / UX internships</dd></div>
+        <div><dt>Learning</dt><dd>SQL, Tableau, Python</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS: one ticket-style card per certificate (copy an <article> to add more) -->
+  <section class="certs" id="certs">
+    <div class="section-head" data-reveal>
+      <h2>Certifications</h2>
+      <p>Courses I've finished, with credentials you can check.</p>
+    </div>
+
+    <div class="cert-list">
+      <article class="cert s-violet-bg" data-reveal>
+        <div class="cert-side">
+          <strong class="cert-num" aria-hidden="true">01</strong>
+          <span class="cert-issuer">Udemy</span>
+        </div>
+        <div class="cert-main">
+          <span class="tag">Certificate of completion · AI automation</span>
+          <h3>AI Builder: Create Agents, Voice Agents &amp; Automations in n8n</h3>
+          <dl class="cert-meta">
+            <div><dt>Issued</dt><dd>29 July 2026</dd></div>
+            <div><dt>Length</dt><dd>14.5 hours</dd></div>
+            <div><dt>Instructors</dt><dd>Ligency, Ed Donner</dd></div>
+          </dl>
+          <a class="cert-link" href="https://ude.my/UC-3d02e516-c0a3-499f-b0b7-c131f91901fd" target="_blank" rel="noopener">View credential <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- CONTACT: title tips up into place as it enters -->
+  <section class="contact" id="contact">
+    <h2 class="contact-title" id="contact-title">Let's build<br>something useful.</h2>
+    <div class="contact-links" data-reveal>
+      <a href="https://www.linkedin.com/in/devarya-ganjekar-8a394a3b5" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://github.com/dev140627" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="email" href="mailto:devaryasunilganjekar14@gmail.com">devaryasunilganjekar14@gmail.com</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>Devarya · Portfolio v2</span>
+  <span>Designed &amp; built in 2026</span>
+</footer>
+
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script defer src="script.js"></script>
+</body>
+</html>
