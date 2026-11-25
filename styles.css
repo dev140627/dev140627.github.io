@@ -430,7 +430,8 @@ h2 { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 6vw, 
 .facts dd { margin: 4px 0 0; }
 
 /* ---------- CERTIFICATIONS ---------- */
-.certs { padding-block: 96px; border-bottom: 1px solid var(--line); }
+/* clip: the card's tilted entrance is briefly wider than the page */
+.certs { padding-block: 96px; border-bottom: 1px solid var(--line); overflow-x: clip; }
 .cert-list { display: grid; gap: 20px; }
 .cert {
   --stub: clamp(150px, 18vw, 220px);
